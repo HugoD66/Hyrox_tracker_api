@@ -5,6 +5,7 @@ import { CreateTrainingDto } from './dto/create-training.dto';
 import { UpdateTrainingDto } from './dto/update-training.dto';
 import { JwtAuthGuard } from '@/common/guards/jwt-auth.guard';
 import { CurrentUser } from '@/common/decorators/current-user.decorator';
+import { TrainingType } from '@prisma/client';
 
 @ApiTags('trainings')
 @Controller('trainings')
@@ -25,7 +26,7 @@ export class TrainingsController {
 
   @Get()
   @ApiOperation({ summary: 'Get all trainings for current user' })
-  @ApiQuery({ name: 'type', required: false })
+  @ApiQuery({ name: 'type', required: false, enum: TrainingType })
   @ApiQuery({ name: 'startDate', required: false })
   @ApiQuery({ name: 'endDate', required: false })
   @ApiResponse({ status: 200, description: 'Trainings retrieved successfully' })
@@ -34,8 +35,13 @@ export class TrainingsController {
     @Query('type') type?: string,
     @Query('startDate') startDate?: string,
     @Query('endDate') endDate?: string,
-  ) {
-    return this.trainingsService.findAll(user.userId, { type, startDate, endDate });
+  )
+  {
+    return this.trainingsService.findAll(user.userId, {
+      type: type ? (type as TrainingType) : undefined,
+      startDate,
+      endDate,
+    });
   }
 
   @Get(':id')

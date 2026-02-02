@@ -2,12 +2,15 @@ import { Injectable, NotFoundException, ForbiddenException } from '@nestjs/commo
 import { PrismaService } from '@/prisma/prisma.service';
 import { CreateTrainingDto } from './dto/create-training.dto';
 import { UpdateTrainingDto } from './dto/update-training.dto';
+import { TrainingType } from '@prisma/client';
 
 @Injectable()
-export class TrainingsService {
+export class TrainingsService
+{
   constructor(private readonly prisma: PrismaService) {}
 
-  async create(userId: string, createTrainingDto: CreateTrainingDto) {
+  async create(userId: string, createTrainingDto: CreateTrainingDto)
+  {
     const training = await this.prisma.training.create({
       data: {
         ...createTrainingDto,
@@ -25,22 +28,24 @@ export class TrainingsService {
   async findAll(
     userId: string,
     filters: {
-      type?: string;
+      type?: TrainingType;
       startDate?: string;
       endDate?: string;
     },
-  ) {
+  )
+  {
     const trainings = await this.prisma.training.findMany({
       where: {
         userId,
-        ...(filters.type && { type: filters.type }),
-        ...(filters.startDate &&
-          filters.endDate && {
+        ...(filters.type ? { type: filters.type } : {}),
+        ...(filters.startDate && filters.endDate
+          ? {
             date: {
               gte: new Date(filters.startDate),
               lte: new Date(filters.endDate),
             },
-          }),
+          }
+          : {}),
       },
       orderBy: {
         date: 'desc',
@@ -53,16 +58,19 @@ export class TrainingsService {
     };
   }
 
-  async findOne(id: string, userId: string) {
+  async findOne(id: string, userId: string)
+  {
     const training = await this.prisma.training.findUnique({
       where: { id },
     });
 
-    if (!training) {
+    if (!training)
+    {
       throw new NotFoundException('Training not found');
     }
 
-    if (training.userId !== userId) {
+    if (training.userId !== userId)
+    {
       throw new ForbiddenException('Access denied');
     }
 
@@ -72,16 +80,19 @@ export class TrainingsService {
     };
   }
 
-  async update(id: string, userId: string, updateTrainingDto: UpdateTrainingDto) {
+  async update(id: string, userId: string, updateTrainingDto: UpdateTrainingDto)
+  {
     const existingTraining = await this.prisma.training.findUnique({
       where: { id },
     });
 
-    if (!existingTraining) {
+    if (!existingTraining)
+    {
       throw new NotFoundException('Training not found');
     }
 
-    if (existingTraining.userId !== userId) {
+    if (existingTraining.userId !== userId)
+    {
       throw new ForbiddenException('Access denied');
     }
 
@@ -97,16 +108,19 @@ export class TrainingsService {
     };
   }
 
-  async remove(id: string, userId: string) {
+  async remove(id: string, userId: string)
+  {
     const training = await this.prisma.training.findUnique({
       where: { id },
     });
 
-    if (!training) {
+    if (!training)
+    {
       throw new NotFoundException('Training not found');
     }
 
-    if (training.userId !== userId) {
+    if (training.userId !== userId)
+    {
       throw new ForbiddenException('Access denied');
     }
 
