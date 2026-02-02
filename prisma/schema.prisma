@@ -1,0 +1,113 @@
+// prisma/schema.prisma
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String        @id @default(uuid())
+  email     String        @unique
+  password  String
+  firstName String
+  lastName  String
+  category  String?
+  weight    Float?
+  height    Float?
+  avatar    String?
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  courses   Course[]
+  goals     Goal[]
+  trainings Training[]
+  settings  UserSettings?
+
+  @@map("users")
+}
+
+model Course {
+  id          String       @id @default(uuid())
+  userId      String
+  name        String
+  city        String
+  date        DateTime
+  category    String
+  totalTime   Int
+  roxzoneTime Int?
+  runTotal    Int?
+  bestRunLap  Int?
+  notes       String?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  times       CourseTime[]
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([date])
+  @@map("courses")
+}
+
+model CourseTime {
+  id          String @id @default(uuid())
+  courseId    String
+  segment     String
+  timeSeconds Int
+  place       Int?
+  course      Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@unique([courseId, segment])
+  @@index([courseId])
+  @@map("course_times")
+}
+
+model Training {
+  id        String   @id @default(uuid())
+  userId    String
+  type      String
+  date      DateTime
+  duration  Int?
+  distance  Float?
+  load      Float?
+  rpe       Int?
+  notes     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([date])
+  @@map("trainings")
+}
+
+model Goal {
+  id         String    @id @default(uuid())
+  userId     String
+  title      String
+  targetTime Int?
+  targetDate DateTime?
+  achieved   Boolean   @default(false)
+  achievedAt DateTime?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("goals")
+}
+
+model UserSettings {
+  id            String   @id @default(uuid())
+  userId        String   @unique
+  theme         String   @default("light")
+  notifications Boolean  @default(true)
+  language      String   @default("fr")
+  updatedAt     DateTime @updatedAt
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_settings")
+}

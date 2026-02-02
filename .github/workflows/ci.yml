@@ -1,0 +1,137 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [main]
+
+env:
+  NODE_VERSION: '20'
+
+jobs:
+  backend-test:
+    name: Backend - Test & Build
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: .
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Pull PostgreSQL image with retry
+        run: |
+          for i in 1 2 3 4 5; do
+            echo "Attempt $i to pull postgres:15-alpine"
+            docker pull postgres:15-alpine && break || sleep $((i * 10))
+          done
+
+      - name: Start PostgreSQL
+        run: |
+          docker run -d \
+            --name postgres \
+            --restart unless-stopped \
+            -e POSTGRES_USER=postgres \
+            -e POSTGRES_PASSWORD=postgres \
+            -e POSTGRES_DB=hyrox_db_test \
+            -p 127.0.0.1:5432:5432 \
+            postgres:15-alpine
+          
+          # Wait for PostgreSQL to be ready and accepting connections
+          echo "Waiting for PostgreSQL to be ready..."
+          for i in {1..30}; do
+            if docker exec postgres pg_isready -U postgres > /dev/null 2>&1; then
+              # Test actual connection from inside container
+              if docker exec postgres psql -U postgres -d hyrox_db_test -c "SELECT 1" > /dev/null 2>&1; then
+                # Test connection from host (127.0.0.1)
+                if command -v psql > /dev/null 2>&1; then
+                  if PGPASSWORD=postgres psql -h 127.0.0.1 -p 5432 -U postgres -d hyrox_db_test -c "SELECT 1" > /dev/null 2>&1; then
+                    echo "PostgreSQL is ready and accessible from host!"
+                    break
+                  fi
+                else
+                  # If psql is not available, test with netcat or just assume it's ready
+                  if nc -z 127.0.0.1 5432 2>/dev/null || true; then
+                    echo "PostgreSQL is ready (port 5432 is open)!"
+                    break
+                  fi
+                fi
+              fi
+            fi
+            if [ $i -eq 30 ]; then
+              echo "PostgreSQL failed to start after 60 seconds"
+              echo "Container status:"
+              docker ps -a | grep postgres
+              echo "Container logs:"
+              docker logs postgres
+              exit 1
+            fi
+            sleep 2
+          done
+          
+          # Final verification
+          echo "Final PostgreSQL status check:"
+          docker ps | grep postgres
+          echo "Testing connection from host..."
+          docker exec postgres pg_isready -U postgres
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci --audit=false
+        env:
+          npm_config_audit: false
+          DATABASE_URL: postgresql://postgres:postgres@127.0.0.1:5432/hyrox_db_test
+
+      - name: Generate Prisma Client
+        run: npx prisma generate
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@127.0.0.1:5432/hyrox_db_test
+
+      - name: Verify PostgreSQL connection before migrations
+        run: |
+          echo "Verifying PostgreSQL connection..."
+          docker exec postgres psql -U postgres -d hyrox_db_test -c "SELECT version();" || {
+            echo "PostgreSQL connection failed!"
+            docker ps -a
+            docker logs postgres
+            exit 1
+          }
+
+      - name: Run database migrations
+        run: npx prisma migrate deploy
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@127.0.0.1:5432/hyrox_db_test
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Run tests
+        run: npm test -- --coverage --watchAll=false --passWithNoTests
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@127.0.0.1:5432/hyrox_db_test
+
+      - name: Build
+        run: npm run build
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@127.0.0.1:5432/hyrox_db_test
+
+      - name: Verify PostgreSQL is still running
+        run: |
+          if ! docker ps | grep -q postgres; then
+            echo "PostgreSQL container is not running!"
+            docker ps -a
+            exit 1
+          fi
+          docker exec postgres pg_isready -U postgres
+
+      - name: Stop PostgreSQL
+        if: always()
+        run: docker stop postgres || true
+
