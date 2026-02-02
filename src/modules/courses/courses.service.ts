@@ -19,11 +19,13 @@ export class CoursesService {
   ) {}
 
   async create(userId: string, createCourseDto: CreateCourseDto) {
-    const { times, ...courseData } = createCourseDto;
+    const { times, date, ...courseData } = createCourseDto;
+    const courseDate = new Date(date);
+
     const existing = await this.prisma.course.findMany({
       where: {
         name: courseData.name,
-        date: courseData.date,
+        date: courseDate,
         userId,
       },
     });
@@ -35,6 +37,7 @@ export class CoursesService {
     const course = await this.prisma.course.create({
       data: {
         ...courseData,
+        date: courseDate,
         userId,
         times: {
           create: times.map((time: { segment: string; timeSeconds: number; place?: number }) => ({
