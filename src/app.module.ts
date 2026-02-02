@@ -8,6 +8,7 @@ import { TrainingsModule } from './modules/trainings/trainings.module';
 import { StatsModule } from './modules/stats/stats.module';
 import { HealthModule } from './modules/health/health.module';
 import { GoalsModule } from './modules/goals/goals.module';
+import { TrainingPresetModule } from '@/modules/training-preset/training-preset.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { GoalsModule } from './modules/goals/goals.module';
     StatsModule,
     HealthModule,
     GoalsModule,
+    TrainingPresetModule,
   ],
 })
 export class AppModule {}
