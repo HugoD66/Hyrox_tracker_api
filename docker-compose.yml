@@ -40,7 +40,7 @@ services:
     command: >
       sh -c "
         npm run prisma:generate &&
-        npm run prisma:migrate &&
+        npm run prisma:migrate:deploy &&
         npm run prisma:seed
       "
 
@@ -70,7 +70,7 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
-    command: npm run start:dev
+    command: sh -c "npm run prisma:generate && npm run start:dev"
 
 volumes:
   postgres_data:
