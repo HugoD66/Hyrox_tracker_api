@@ -102,6 +102,176 @@ async function main(): Promise<void>
     ],
   });
 
+  // 🔧 Training presets (catalogue global)
+  await prisma.trainingPreset.createMany({
+    data: [
+      // -----------------------
+      // RUN
+      // -----------------------
+      {
+        type: TrainingType.Run,
+        difficulty: 'novice',
+        exerciseName: 'Run easy',
+        durationSeconds: 30 * 60,
+        distanceMeters: 5_000,
+        comment: 'Endurance facile (RPE 5/10)',
+      },
+      {
+        type: TrainingType.Run,
+        difficulty: 'intermediate',
+        exerciseName: 'Tempo run',
+        durationSeconds: 45 * 60,
+        distanceMeters: 8_000,
+        comment: 'Soutenu mais contrôlé (RPE 7/10)',
+      },
+      {
+        type: TrainingType.Run,
+        difficulty: 'expert',
+        exerciseName: 'Intervals',
+        rounds: 6,
+        restSeconds: 90,
+        comment: '6x800m @ allure 10K, récup 90s',
+      },
+
+      // -----------------------
+      // BIKE
+      // -----------------------
+      {
+        type: TrainingType.Bike,
+        difficulty: 'novice',
+        exerciseName: 'Bike easy',
+        durationSeconds: 35 * 60,
+        comment: 'Cadence facile, zone 2',
+      },
+      {
+        type: TrainingType.Bike,
+        difficulty: 'intermediate',
+        exerciseName: 'Bike tempo',
+        durationSeconds: 50 * 60,
+        comment: 'Zone 3, cadence régulière',
+      },
+      {
+        type: TrainingType.Bike,
+        difficulty: 'expert',
+        exerciseName: 'Bike intervals',
+        rounds: 8,
+        restSeconds: 60,
+        comment: '8x2min fort / 1min easy',
+      },
+
+      // -----------------------
+      // SWIM
+      // -----------------------
+      {
+        type: TrainingType.Swim,
+        difficulty: 'novice',
+        exerciseName: 'Swim easy',
+        durationSeconds: 30 * 60,
+        comment: 'Technique + nage continue facile',
+      },
+      {
+        type: TrainingType.Swim,
+        difficulty: 'intermediate',
+        exerciseName: 'Swim mixed',
+        rounds: 10,
+        restSeconds: 30,
+        comment: '10x100m, récup 30s (allure stable)',
+      },
+      {
+        type: TrainingType.Swim,
+        difficulty: 'expert',
+        exerciseName: 'Swim intervals',
+        rounds: 12,
+        restSeconds: 20,
+        comment: '12x100m, récup 20s (allure soutenue)',
+      },
+
+      // -----------------------
+      // STRENGTH
+      // -----------------------
+      {
+        type: TrainingType.Strength,
+        difficulty: 'novice',
+        exerciseName: 'Full body basics',
+        format: TrainingFormat.straight_sets,
+        sets: 3,
+        reps: 8,
+        comment: 'Mouvements de base, focus technique',
+      },
+      {
+        type: TrainingType.Strength,
+        difficulty: 'intermediate',
+        exerciseName: 'Strength hypertrophy',
+        format: TrainingFormat.straight_sets,
+        sets: 4,
+        reps: 10,
+        comment: 'Charge modérée, tempo contrôlé',
+      },
+      {
+        type: TrainingType.Strength,
+        difficulty: 'expert',
+        exerciseName: 'Strength for time',
+        format: TrainingFormat.for_time,
+        rounds: 5,
+        comment: '5 rounds for time (squat / push / pull)',
+      },
+
+      // -----------------------
+      // ROW
+      // -----------------------
+      {
+        type: TrainingType.Row,
+        difficulty: 'novice',
+        exerciseName: 'Row easy',
+        durationSeconds: 20 * 60,
+        comment: 'Technique + rythme facile',
+      },
+      {
+        type: TrainingType.Row,
+        difficulty: 'intermediate',
+        exerciseName: 'Row steady',
+        durationSeconds: 30 * 60,
+        comment: 'Allure stable, respir. contrôlée',
+      },
+      {
+        type: TrainingType.Row,
+        difficulty: 'expert',
+        exerciseName: 'Row intervals',
+        rounds: 10,
+        restSeconds: 60,
+        comment: '10x500m fort, récup 60s',
+      },
+
+      // -----------------------
+      // HIKE
+      // -----------------------
+      {
+        type: TrainingType.Hike,
+        difficulty: 'novice',
+        exerciseName: 'Hike easy',
+        durationSeconds: 45 * 60,
+        comment: 'Marche active, terrain facile',
+      },
+      {
+        type: TrainingType.Hike,
+        difficulty: 'intermediate',
+        exerciseName: 'Hike moderate',
+        durationSeconds: 75 * 60,
+        comment: 'Dénivelé modéré, allure soutenue',
+      },
+      {
+        type: TrainingType.Hike,
+        difficulty: 'expert',
+        exerciseName: 'Hike ruck',
+        durationSeconds: 90 * 60,
+        weightKg: 10,
+        comment: 'Ruck avec charge (10kg), dénivelé si possible',
+      },
+    ],
+    skipDuplicates: true,
+  });
+
+
   console.log('✅ Created sample trainings:', trainings.count);
 
   await prisma.goal.createMany({

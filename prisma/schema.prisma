@@ -141,3 +141,33 @@ model UserSettings {
 
   @@map("user_settings")
 }
+
+enum TrainingDifficulty {
+  novice
+  intermediate
+  expert
+}
+
+model TrainingPreset {
+  id         String             @id @default(uuid())
+  type       TrainingType
+  difficulty TrainingDifficulty
+
+  exerciseName String?
+  format       TrainingFormat?
+  rounds       Int?
+  sets         Int?
+  reps         Int?
+  weightKg     Float?
+  durationSeconds Int?
+  distanceMeters  Int?
+  restSeconds     Int?
+  comment         String?
+
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([type, difficulty])
+  @@index([type, difficulty])
+  @@map("training_presets")
+}

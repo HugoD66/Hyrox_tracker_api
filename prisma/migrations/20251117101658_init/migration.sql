@@ -169,3 +169,42 @@ ALTER TABLE "user_settings"
     ADD CONSTRAINT "user_settings_userId_fkey"
         FOREIGN KEY ("userId") REFERENCES "users"("id")
             ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+-- Enum (PostgreSQL)
+CREATE TYPE "TrainingDifficulty" AS ENUM (
+  'novice',
+  'intermediate',
+  'expert'
+);
+
+-- CreateTable
+CREATE TABLE "training_presets" (
+                                    "id" TEXT NOT NULL,
+                                    "type" "TrainingType" NOT NULL,
+                                    "difficulty" "TrainingDifficulty" NOT NULL,
+
+                                    "exerciseName" TEXT,
+                                    "format" "TrainingFormat",
+                                    "rounds" INTEGER,
+                                    "sets" INTEGER,
+                                    "reps" INTEGER,
+                                    "weightKg" DOUBLE PRECISION,
+                                    "durationSeconds" INTEGER,
+                                    "distanceMeters" INTEGER,
+                                    "restSeconds" INTEGER,
+                                    "comment" TEXT,
+
+                                    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                                    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+                                    CONSTRAINT "training_presets_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateIndex
+CREATE UNIQUE INDEX "training_presets_type_difficulty_key"
+    ON "training_presets"("type", "difficulty");
+
+-- CreateIndex
+CREATE INDEX "training_presets_type_difficulty_idx"
+    ON "training_presets"("type", "difficulty");
