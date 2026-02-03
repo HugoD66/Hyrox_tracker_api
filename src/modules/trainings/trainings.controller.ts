@@ -5,14 +5,19 @@ import { CreateTrainingDto } from './dto/create-training.dto';
 import { UpdateTrainingDto } from './dto/update-training.dto';
 import { JwtAuthGuard } from '@/common/guards/jwt-auth.guard';
 import { CurrentUser } from '@/common/decorators/current-user.decorator';
-import { TrainingType } from '@prisma/client';
+import { TrainingDifficulty, TrainingType } from '@prisma/client';
+import { HttpService } from '@nestjs/axios';
+import { firstValueFrom } from 'rxjs';
 
 @ApiTags('trainings')
 @Controller('trainings')
 @UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
 export class TrainingsController {
-  constructor(private readonly trainingsService: TrainingsService) {}
+  private readonly baseUrl: string = 'https://equipements.sports.gouv.fr/api/explore/v2.1';
+  private readonly datasetId: string = 'data-es';
+
+  public constructor(private readonly trainingsService: TrainingsService,     private readonly httpService: HttpService,) {}
 
   @Post()
   @ApiOperation({ summary: 'Create a new training' })
@@ -22,6 +27,65 @@ export class TrainingsController {
     @CurrentUser() user: { userId: string },
   ) {
     return this.trainingsService.create(user.userId, createTrainingDto);
+  }
+
+
+  @Get('training-around')
+  @ApiOperation({ summary: 'Get training places (Data ES) filtered by department and/or city' })
+  @ApiQuery({ name: 'department', required: false, type: String, example: '66' })
+  @ApiQuery({ name: 'city', required: false, type: String, example: 'Perpignan' })
+  @ApiQuery({ name: 'limit', required: false, type: Number, example: 20 })
+  @ApiResponse({ status: 200, description: 'Training places found' })
+  public async find(
+    @Query('department') department?: string,
+    @Query('city') city?: string,
+    @Query('limit') limit?: string,
+  ): Promise<unknown>
+  {
+    const whereParts: string[] = [];
+
+    if (department)
+    {
+      whereParts.push(`dep_code="${department}"`);
+    }
+
+    if (city)
+    {
+      // Attention: champ "new_name" dans les données Data ES
+      whereParts.push(`new_name="${city}"`);
+    }
+
+    const whereClause: string | undefined = whereParts.length > 0 ? whereParts.join(' AND ') : undefined;
+
+    const params: Record<string, string> =
+      {
+        limit: String(Number(limit ?? 20)),
+        select: [
+          'equip_nom',
+          'equip_type_name',
+          'inst_nom',
+          'inst_adresse',
+          'inst_cp',
+          'new_name',
+          'dep_code',
+          'dep_nom',
+          'reg_nom',
+          'equip_coordonnees',
+        ].join(','),
+      };
+
+    if (whereClause)
+    {
+      params.where = whereClause;
+    }
+
+    const url: string = `${this.baseUrl}/catalog/datasets/${this.datasetId}/records`;
+
+    const response = await firstValueFrom(
+      this.httpService.get(url, { params }),
+    );
+
+    return response.data;
   }
 
   @Get()
