@@ -5,9 +5,10 @@ import { CreateTrainingDto } from './dto/create-training.dto';
 import { UpdateTrainingDto } from './dto/update-training.dto';
 import { JwtAuthGuard } from '@/common/guards/jwt-auth.guard';
 import { CurrentUser } from '@/common/decorators/current-user.decorator';
-import { TrainingDifficulty, TrainingType } from '@prisma/client';
+import { TrainingType } from '@prisma/client';
 import { HttpService } from '@nestjs/axios';
 import { firstValueFrom } from 'rxjs';
+import { AxiosResponse } from 'axios';
 
 @ApiTags('trainings')
 @Controller('trainings')
@@ -17,7 +18,10 @@ export class TrainingsController {
   private readonly baseUrl: string = 'https://equipements.sports.gouv.fr/api/explore/v2.1';
   private readonly datasetId: string = 'data-es';
 
-  public constructor(private readonly trainingsService: TrainingsService,     private readonly httpService: HttpService,) {}
+  public constructor(
+    private readonly trainingsService: TrainingsService,
+    private readonly httpService: HttpService,
+  ) {}
 
   @Post()
   @ApiOperation({ summary: 'Create a new training' })
@@ -81,8 +85,8 @@ export class TrainingsController {
 
     const url: string = `${this.baseUrl}/catalog/datasets/${this.datasetId}/records`;
 
-    const response = await firstValueFrom(
-      this.httpService.get(url, { params }),
+    const response: AxiosResponse<Record<string, unknown>> = await firstValueFrom(
+      this.httpService.get<Record<string, unknown>>(url, { params }),
     );
 
     return response.data;
