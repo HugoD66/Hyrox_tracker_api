@@ -33,7 +33,6 @@ export class TrainingsController {
     return this.trainingsService.create(user.userId, createTrainingDto);
   }
 
-
   @Get('training-around')
   @ApiOperation({ summary: 'Get training places (Data ES) filtered by department and/or city' })
   @ApiQuery({ name: 'department', required: false, type: String, example: '66' })
@@ -44,42 +43,38 @@ export class TrainingsController {
     @Query('department') department?: string,
     @Query('city') city?: string,
     @Query('limit') limit?: string,
-  ): Promise<unknown>
-  {
+  ): Promise<unknown> {
     const whereParts: string[] = [];
 
-    if (department)
-    {
+    if (department) {
       whereParts.push(`dep_code="${department}"`);
     }
 
-    if (city)
-    {
+    if (city) {
       // Attention: champ "new_name" dans les données Data ES
       whereParts.push(`new_name="${city}"`);
     }
 
-    const whereClause: string | undefined = whereParts.length > 0 ? whereParts.join(' AND ') : undefined;
+    const whereClause: string | undefined =
+      whereParts.length > 0 ? whereParts.join(' AND ') : undefined;
 
-    const params: Record<string, string> =
-      {
-        limit: String(Number(limit ?? 20)),
-        select: [
-          'equip_nom',
-          'equip_type_name',
-          'inst_nom',
-          'inst_adresse',
-          'inst_cp',
-          'new_name',
-          'dep_code',
-          'dep_nom',
-          'reg_nom',
-          'equip_coordonnees',
-        ].join(','),
-      };
+    const params: Record<string, string> = {
+      limit: String(Number(limit ?? 20)),
+      select: [
+        'equip_nom',
+        'equip_type_name',
+        'inst_nom',
+        'inst_adresse',
+        'inst_cp',
+        'new_name',
+        'dep_code',
+        'dep_nom',
+        'reg_nom',
+        'equip_coordonnees',
+      ].join(','),
+    };
 
-    if (whereClause)
-    {
+    if (whereClause) {
       params.where = whereClause;
     }
 
@@ -103,8 +98,7 @@ export class TrainingsController {
     @Query('type') type?: string,
     @Query('startDate') startDate?: string,
     @Query('endDate') endDate?: string,
-  )
-  {
+  ) {
     return this.trainingsService.findAll(user.userId, {
       type: type ? (type as TrainingType) : undefined,
       startDate,
