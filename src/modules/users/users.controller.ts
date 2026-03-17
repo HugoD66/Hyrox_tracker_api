@@ -1,4 +1,4 @@
-import { Controller, Get, Put, Delete, Body, Param, UseGuards } from '@nestjs/common';
+import { Controller, Get, Put, Delete, Body, Param, Query, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { UsersService } from './users.service';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -21,6 +21,21 @@ export class UsersController {
       success: true,
       data: userData,
     };
+  }
+
+  @Get('search')
+  @ApiOperation({ summary: 'Search public user profiles' })
+  @ApiResponse({ status: 200, description: 'Users retrieved successfully' })
+  async search(@Query('q') q: string | undefined, @CurrentUser() user: { userId: string }) {
+    return this.usersService.searchPublicUsers(q, user.userId);
+  }
+
+  @Get('public/:id')
+  @ApiOperation({ summary: 'Get a public user profile with course stats' })
+  @ApiResponse({ status: 200, description: 'Public profile retrieved successfully' })
+  @ApiResponse({ status: 404, description: 'User not found or profile is private' })
+  async getPublicProfile(@Param('id') id: string) {
+    return this.usersService.getPublicProfileWithStats(id);
   }
 
   @Get(':id')
