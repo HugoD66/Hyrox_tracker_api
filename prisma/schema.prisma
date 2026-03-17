@@ -20,6 +20,7 @@ model User {
   weight    Float?
   height    Float?
   avatar    String?
+  isPublic  Boolean       @default(false)
   createdAt DateTime      @default(now())
   updatedAt DateTime      @updatedAt
   courses   Course[]
