@@ -72,6 +72,19 @@ services:
       - /app/node_modules
     command: sh -c "npm run prisma:generate && npm run start:dev"
 
+  prometheus:
+    image: prom/prometheus:v2.54.0
+    container_name: hyrox-prometheus
+    restart: unless-stopped
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    ports:
+      - "9090:9090"
+    networks:
+      - hyrox-network
+
 volumes:
   postgres_data:
     driver: local
