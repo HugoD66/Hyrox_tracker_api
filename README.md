@@ -2,36 +2,36 @@
 
 Application de suivi des performances Hyrox avec Angular et NestJS (développement local uniquement).
 
-## Prérequis
-
-- Docker et Docker Compose
-- Node.js 20+
-- PostgreSQL 15+
-
-## Installation
-
-### Développement local
-
-1. Installer les dépendances du backend (nécessaire pour que le conteneur trouve `bcryptjs` et les autres modules) :
+## Lancer le projet
 
 ```bash
-cd backend && npm install && cd ..
+docker compose up -d
 ```
 
-2. Lancer tous les services :
+- Frontend : `http://localhost:4200`
+- API : `http://localhost:3000`
+- Swagger : `http://localhost:3000/api/docs`
 
-```bash
-docker-compose up -d
-```
+## Qualité backend
 
-3. Les migrations et le seed sont exécutés automatiquement au démarrage via le service `db-init`.
+- Hooks Husky : `pre-commit` (lint-staged), `pre-push` (lint, typecheck, test)
+- Commandes :
+  - `npm run lint`
+  - `npm run typecheck`
+  - `npm test`
 
-4. Accéder à l'application :
+## Metrics backend
 
-- **Frontend** : http://localhost:4200
-- **Backend API** : http://localhost:3000
-- **API Documentation (Swagger)** : http://localhost:3000/api/docs
-- **Health check** : http://localhost:3000/api/health/liveness
+- Endpoint Prometheus : `GET http://localhost:3000/api/metrics`
+- UI Prometheus : `http://localhost:9090`
+- UI Grafana : `http://localhost:3001`
+- Dashboard provisionné : `Hyrox / Hyrox Backend`
+- Métriques exposées :
+  - runtime Node.js/process via `prom-client`
+  - trafic HTTP par méthode, route et code HTTP
+  - latence HTTP avec histogramme Prometheus
+  - requêtes HTTP en cours
+  - statut et durée du check PostgreSQL
 
 **En cas d’erreur `ERR_CONNECTION_RESET` ou `Failed to load resource`** : le backend n’est probablement pas démarré ou redémarre en boucle. Vérifier que tous les services tournent :
 

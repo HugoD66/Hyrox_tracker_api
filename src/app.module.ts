@@ -1,4 +1,5 @@
 import { DebugModule } from '@/modules/debug/debug.module';
+import { MetricsModule } from '@/modules/metrics/metrics.module';
 import { TrainingPresetModule } from '@/modules/training-preset/training-preset.module';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
@@ -40,6 +41,7 @@ const isDevelopment = process.env.NODE_ENV === 'development';
     TrainingPresetModule,
     FollowsModule,
     MessagesModule,
+    MetricsModule,
     ...(isDevelopment ? [DebugModule] : []),
   ],
 })

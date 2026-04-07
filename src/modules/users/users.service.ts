@@ -1,4 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import { PrismaService } from '@/prisma/prisma.service';
 import { UpdateUserDto } from './dto/update-user.dto';
 
@@ -63,16 +64,15 @@ export class UsersService {
 
   async searchPublicUsers(q?: string, excludeUserId?: string) {
     const trimmed = q?.trim();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const where: any = {
+    const where: Prisma.UserWhereInput = {
       isPublic: true,
       ...(excludeUserId && { NOT: { id: excludeUserId } }),
     };
 
     if (trimmed && trimmed.length > 0) {
       where.OR = [
-        { firstName: { contains: trimmed, mode: 'insensitive' } },
-        { lastName: { contains: trimmed, mode: 'insensitive' } },
+        { firstName: { contains: trimmed, mode: Prisma.QueryMode.insensitive } },
+        { lastName: { contains: trimmed, mode: Prisma.QueryMode.insensitive } },
       ];
     }
 
