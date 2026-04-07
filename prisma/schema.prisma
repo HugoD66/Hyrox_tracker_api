@@ -23,10 +23,14 @@ model User {
   isPublic  Boolean       @default(false)
   createdAt DateTime      @default(now())
   updatedAt DateTime      @updatedAt
-  courses   Course[]
-  goals     Goal[]
-  trainings Training[]
-  settings  UserSettings?
+  courses          Course[]
+  goals            Goal[]
+  trainings        Training[]
+  settings         UserSettings?
+  followers        Follow[]    @relation("UserFollowing")
+  following        Follow[]    @relation("UserFollowers")
+  sentMessages     Message[]   @relation("SentMessages")
+  receivedMessages Message[]   @relation("ReceivedMessages")
 
   @@map("users")
 }
@@ -141,6 +145,35 @@ model UserSettings {
   user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("user_settings")
+}
+
+model Follow {
+  id          String   @id @default(uuid())
+  followerId  String
+  followingId String
+  createdAt   DateTime @default(now())
+  follower    User     @relation("UserFollowers", fields: [followerId], references: [id], onDelete: Cascade)
+  following   User     @relation("UserFollowing", fields: [followingId], references: [id], onDelete: Cascade)
+
+  @@unique([followerId, followingId])
+  @@index([followerId])
+  @@index([followingId])
+  @@map("follows")
+}
+
+model Message {
+  id         String   @id @default(uuid())
+  senderId   String
+  receiverId String
+  content    String
+  read       Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  sender     User     @relation("SentMessages", fields: [senderId], references: [id], onDelete: Cascade)
+  receiver   User     @relation("ReceivedMessages", fields: [receiverId], references: [id], onDelete: Cascade)
+
+  @@index([senderId, receiverId])
+  @@index([receiverId, senderId])
+  @@map("messages")
 }
 
 enum TrainingDifficulty {
