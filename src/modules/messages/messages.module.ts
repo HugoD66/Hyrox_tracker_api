@@ -10,11 +10,12 @@ import { MessagesGateway } from './messages.gateway';
     JwtModule.registerAsync({
       inject: [ConfigService],
       useFactory: (config: ConfigService) => ({
-        secret: config.get('JWT_SECRET', 'dev-secret-key'),
+        secret: config.get('JWT_SECRET', 'your-secret-key'),
       }),
     }),
   ],
   controllers: [MessagesController],
   providers: [MessagesService, MessagesGateway],
+  exports: [MessagesGateway],
 })
 export class MessagesModule {}

@@ -7,12 +7,11 @@ async function main(): Promise<void>
 {
   console.log('🌱 Starting seed...');
 
-  await prisma.courseTime.deleteMany();
-  await prisma.course.deleteMany();
-  await prisma.training.deleteMany();
-  await prisma.goal.deleteMany();
-  await prisma.userSettings.deleteMany();
-  await prisma.user.deleteMany();
+  const existingUser = await prisma.user.findUnique({ where: { email: 'demo@hyrox.com' } });
+  if (existingUser) {
+    console.log('✅ Demo data already exists, skipping seed.');
+    return;
+  }
 
   const password = await bcrypt.hash('Demo1234', 10);
   const user = await prisma.user.create({

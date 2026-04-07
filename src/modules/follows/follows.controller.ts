@@ -46,4 +46,10 @@ export class FollowsController {
   getMutual(@CurrentUser() user: { userId: string }) {
     return this.followsService.getMutualFollows(user.userId);
   }
+
+  @Get('me/recent-followers')
+  @ApiOperation({ summary: 'Get followers from the last 24h' })
+  getRecentFollowers(@CurrentUser() user: { userId: string }) {
+    return this.followsService.getRecentFollowers(user.userId);
+  }
 }
