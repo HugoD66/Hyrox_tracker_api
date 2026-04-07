@@ -66,6 +66,17 @@ docker exec -it hyrox-backend npx prisma studio
 # Puis ouvrir http://localhost:5555
 ```
 
+## Qualite de code (duplication)
+
+Le projet utilise `jscpd` pour mesurer la duplication de code TypeScript.
+
+- Commande locale: `npm run duplication`
+- Commande CI: `npm run duplication:ci`
+- Rapport généré dans `reports/duplication` (JSON + HTML)
+- Le pipeline GitHub Actions exécute l'analyse sur chaque PR et push sur `main`
+- **Important**: Le rapport est **informatif uniquement** et ne bloque jamais la CI (permet d'identifier des opportunités de refactoring)
+- Artefact publie dans `Actions > duplication-report` pour faciliter la consultation
+
 ## Architecture
 
 - **Frontend** : Angular (port 4200)

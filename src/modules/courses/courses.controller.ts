@@ -39,11 +39,11 @@ export class CoursesController {
   @ApiOperation({ summary: 'Create a new course' })
   @ApiResponse({ status: 201, description: 'Course created successfully' })
   @ApiResponse({ status: 400, description: 'Bad request' })
+  @ApiResponse({ status: 409, description: 'A course with the same name already exists' })
   async create(@Body() createCourseDto: CreateCourseDto, @CurrentUser() user: { userId: string }) {
     return this.coursesService.create(user.userId, createCourseDto);
   }
 
-  // Routes d'import - IMPORTANT: Les routes plus spécifiques doivent être avant les routes plus générales
   @Post('import/csv')
   @UseInterceptors(FileInterceptor('file'))
   @ApiOperation({ summary: 'Import courses from CSV file (results.hyrox.com export)' })

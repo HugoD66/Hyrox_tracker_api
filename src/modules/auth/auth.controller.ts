@@ -35,7 +35,7 @@ export class AuthController {
   @ApiOperation({ summary: 'Get current user profile' })
   @ApiResponse({ status: 200, description: 'Profile retrieved successfully' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
-  async getProfile(@CurrentUser() user: { userId: string }) {
-    return this.authService.getProfile(user.userId);
+  async getProfile(@CurrentUser() user: { id: string }) {
+    return this.authService.getProfile(user.id);
   }
 }

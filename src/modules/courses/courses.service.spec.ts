@@ -4,6 +4,14 @@ import { CoursesService } from './courses.service';
 import { PrismaService } from '@/prisma/prisma.service';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { CsvParserService } from '@/modules/courses/csv-parser.service';
+import * as Sentry from '@sentry/nestjs';
+
+jest.mock('@sentry/nestjs', () => ({
+  captureException: jest.fn(),
+  withScope: jest.fn((callback: (scope: { setTag: jest.Mock; setExtra: jest.Mock }) => void) => {
+    callback({ setTag: jest.fn(), setExtra: jest.fn() });
+  }),
+}));
 
 describe('CoursesService', () => {
   let service: CoursesService;
@@ -12,6 +20,7 @@ describe('CoursesService', () => {
     course: {
       create: jest.fn(),
       findMany: jest.fn(),
+      findFirst: jest.fn(),
       findUnique: jest.fn(),
       update: jest.fn(),
       delete: jest.fn(),
@@ -51,7 +60,7 @@ describe('CoursesService', () => {
         totalTime: 5400,
         times: [{ segment: 'run1', timeSeconds: 240 }],
       };
-      mockPrismaService.course.findMany.mockResolvedValue([]);
+      mockPrismaService.course.findFirst.mockResolvedValue(null);
 
       const mockCourse = {
         id: 'course-id',
@@ -69,8 +78,7 @@ describe('CoursesService', () => {
       expect(mockPrismaService.course.create).toHaveBeenCalled();
     });
 
-    it('should throw ConflictException if course with same name and date already exists', async () => {
-      // 🔹 Test la prévention des doublons
+    it('should throw ConflictException and report to Sentry if course with same name already exists', async () => {
       const userId = 'user-id';
       const createCourseDto: CreateCourseDto = {
         name: 'Hyrox Paris',
@@ -81,15 +89,14 @@ describe('CoursesService', () => {
         times: [],
       };
 
-      mockPrismaService.course.findMany.mockResolvedValue([
-        {
-          id: 'existing-id',
-          userId,
-          ...createCourseDto,
-        },
-      ]);
+      mockPrismaService.course.findFirst.mockResolvedValue({
+        id: 'existing-id',
+        name: 'Hyrox Paris',
+      });
 
       await expect(service.create(userId, createCourseDto)).rejects.toThrow(ConflictException);
+      expect(Sentry.withScope).toHaveBeenCalled();
+      expect(Sentry.captureException).toHaveBeenCalled();
     });
 
     it('should throw error if required fields are missing', async () => {
@@ -194,7 +201,7 @@ describe('CoursesService', () => {
         totalTime: 3600,
         times: [],
       };
-      mockPrismaService.course.findMany.mockResolvedValue([]);
+      mockPrismaService.course.findFirst.mockResolvedValue(null);
 
       const mockCourse = { id: 'course-id', userId, ...createCourseDto, times: [] };
       mockPrismaService.course.create.mockResolvedValue(mockCourse);

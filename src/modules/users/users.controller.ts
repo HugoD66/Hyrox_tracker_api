@@ -53,10 +53,10 @@ export class UsersController {
   async update(
     @Param('id') id: string,
     @Body() updateUserDto: UpdateUserDto,
-    @CurrentUser() user: { userId: string },
+    @CurrentUser() user: { id: string },
   ) {
     // Users can only update their own profile
-    if (id !== user.userId) {
+    if (id !== user.id) {
       throw new Error('Unauthorized');
     }
     return this.usersService.update(id, updateUserDto);

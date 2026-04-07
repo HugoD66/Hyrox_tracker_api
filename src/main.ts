@@ -1,36 +1,43 @@
-import { NestFactory } from '@nestjs/core';
+import './instrument';
+
 import { ValidationPipe } from '@nestjs/common';
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { HttpAdapterHost, NestFactory } from '@nestjs/core';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import helmet from 'helmet';
 import { AppModule } from './app.module';
+import { SentryExceptionFilter } from './common/filters/sentry-exception.filter';
+import { SentryInterceptor } from './common/interceptors/sentry.interceptor';
 
-async function bootstrap() {
+async function bootstrap(): Promise<void> {
   try {
     console.log('🚀 Starting NestJS application...');
     console.log(`📦 NODE_ENV: ${process.env.NODE_ENV || 'development'}`);
     console.log(`🔌 PORT: ${process.env.PORT || 3000}`);
     console.log(`🌐 DATABASE_URL: ${process.env.DATABASE_URL ? 'Set' : 'Not set'}`);
+    console.log(`🛰️ SENTRY_DSN: ${process.env.SENTRY_DSN ? 'Set' : 'Not set'}`);
 
-    const app = await NestFactory.create(AppModule, {
+    const application = await NestFactory.create(AppModule, {
       logger: ['error', 'warn', 'log', 'debug'],
     });
 
-    app.use(helmet());
+    const httpAdapterHost = application.get(HttpAdapterHost);
+
+    application.useGlobalFilters(new SentryExceptionFilter(httpAdapterHost.httpAdapter));
+
+    application.use(helmet());
 
     const corsOrigins = process.env.CORS_ORIGIN
       ? process.env.CORS_ORIGIN.split(',').map((origin) => origin.trim())
       : ['http://localhost:4200', 'http://127.0.0.1:4200'];
 
-    console.log(`🌍 CORS Origins: ${corsOrigins.join(', ')}`);
-
-    app.enableCors({
+    application.enableCors({
       origin: corsOrigins,
       credentials: true,
     });
 
-    app.setGlobalPrefix('api');
+    application.setGlobalPrefix('api');
 
-    app.useGlobalPipes(
+    application.useGlobalPipes(
       new ValidationPipe({
         whitelist: true,
         forbidNonWhitelisted: true,
@@ -38,7 +45,7 @@ async function bootstrap() {
       }),
     );
 
-    const config = new DocumentBuilder()
+    const swaggerConfiguration = new DocumentBuilder()
       .setTitle('Hyrox Tracker API')
       .setDescription('API for tracking Hyrox performances and trainings')
       .setVersion('1.0')
@@ -51,24 +58,24 @@ async function bootstrap() {
       .addTag('health', 'Health checks')
       .build();
 
-    const document = SwaggerModule.createDocument(app, config);
-    SwaggerModule.setup('api/docs', app, document);
+    const swaggerDocument = SwaggerModule.createDocument(application, swaggerConfiguration);
+    SwaggerModule.setup('api/docs', application, swaggerDocument);
 
     const port = Number(process.env.PORT) || 3000;
     const host = '0.0.0.0';
 
-    console.log(`🔌 Attempting to listen on ${host}:${port}...`);
+    application.useGlobalInterceptors(new SentryInterceptor());
 
-    await app.listen(port, host);
+    await application.listen(port, host);
 
     console.log(`✅ Application is running on: http://${host}:${port}`);
     console.log(`📚 API Documentation: http://${host}:${port}/api/docs`);
-    console.log(`❤️  Health check: http://${host}:${port}/api/health/liveness`);
-  } catch (error) {
+    console.log(`❤️ Health check: http://${host}:${port}/api/health/liveness`);
+  } catch (error: unknown) {
     console.error('❌ Failed to start application:', error);
     console.error('Error stack:', error instanceof Error ? error.stack : 'No stack trace');
     process.exit(1);
   }
 }
 
-bootstrap();
+void bootstrap();
