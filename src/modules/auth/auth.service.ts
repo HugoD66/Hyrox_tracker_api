@@ -1,4 +1,9 @@
-import { Injectable, UnauthorizedException, ConflictException } from '@nestjs/common';
+import {
+  Injectable,
+  UnauthorizedException,
+  ConflictException,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
 import { RegisterDto } from './dto/register.dto';
@@ -43,6 +48,10 @@ export class AuthService {
   }
 
   async login(loginDto: LoginDto) {
+    if (process.env.SENTRY_DEMO_FORCE_LOGIN_500 === 'true') {
+      throw new InternalServerErrorException('Sentry demo: forced 500 on login');
+    }
+
     // Find user
     const user = await this.usersService.findByEmail(loginDto.email);
     if (!user) {
@@ -70,6 +79,8 @@ export class AuthService {
   }
 
   async getProfile(userId: string) {
+    console.log('CECEI EST UN TEST 22222222222222222')
+
     const user = await this.usersService.findById(userId);
     if (!user) {
       throw new UnauthorizedException('User not found');

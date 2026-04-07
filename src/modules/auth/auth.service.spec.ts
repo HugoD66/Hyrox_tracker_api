@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { UnauthorizedException, ConflictException } from '@nestjs/common';
+import { UnauthorizedException, ConflictException, InternalServerErrorException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
 import { AuthService } from './auth.service';
@@ -42,6 +42,7 @@ describe('AuthService', () => {
 
   afterEach(() => {
     jest.clearAllMocks();
+    delete process.env.SENTRY_DEMO_FORCE_LOGIN_500;
   });
 
   // ---------------- REGISTER ----------------
@@ -110,6 +111,18 @@ describe('AuthService', () => {
 
   // ---------------- LOGIN ----------------
   describe('login', () => {
+    it('should throw InternalServerErrorException when demo flag is enabled', async () => {
+      process.env.SENTRY_DEMO_FORCE_LOGIN_500 = 'true';
+
+      const loginDto: LoginDto = {
+        email: 'test@example.com',
+        password: 'password123',
+      };
+
+      await expect(service.login(loginDto)).rejects.toThrow(InternalServerErrorException);
+      expect(mockUsersService.findByEmail).not.toHaveBeenCalled();
+    });
+
     it('should login with valid credentials', async () => {
       const loginDto: LoginDto = {
         email: 'test@example.com',

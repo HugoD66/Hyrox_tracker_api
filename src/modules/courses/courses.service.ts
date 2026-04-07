@@ -5,6 +5,7 @@ import {
   BadRequestException,
   ConflictException,
 } from '@nestjs/common';
+import * as Sentry from '@sentry/nestjs';
 import { PrismaService } from '@/prisma/prisma.service';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
@@ -21,22 +22,39 @@ export class CoursesService {
   async create(userId: string, createCourseDto: CreateCourseDto) {
     const { times, date, ...courseData } = createCourseDto;
     const courseDate = new Date(date);
+    const normalizedName = courseData.name.trim();
 
-    const existing = await this.prisma.course.findMany({
+    const existing = await this.prisma.course.findFirst({
       where: {
-        name: courseData.name,
-        date: courseDate,
         userId,
+        name: {
+          equals: normalizedName,
+          mode: 'insensitive',
+        },
       },
+      select: { id: true, name: true },
     });
 
-    if (existing.length > 0) {
-      throw new ConflictException('Course already exists for this user on this date');
+    if (existing) {
+      const conflictError = new ConflictException(
+        `Une course nommee "${normalizedName}" existe deja pour cet utilisateur`,
+      );
+
+      Sentry.withScope((scope) => {
+        scope.setTag('domain_error', 'course_duplicate_name');
+        scope.setExtra('userId', userId);
+        scope.setExtra('courseName', normalizedName);
+        scope.setExtra('existingCourseId', existing.id);
+        Sentry.captureException(conflictError);
+      });
+
+      throw conflictError;
     }
 
     const course = await this.prisma.course.create({
       data: {
         ...courseData,
+        name: normalizedName,
         date: courseDate,
         userId,
         times: {
