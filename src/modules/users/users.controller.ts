@@ -16,7 +16,7 @@ export class UsersController {
   @ApiOperation({ summary: 'Get current user profile' })
   @ApiResponse({ status: 200, description: 'User retrieved successfully' })
   async getCurrentUser(@CurrentUser() user: { userId: string }) {
-    console.log('CECEI EST UN TEST 11111111111111111')
+    console.log('CECEI EST UN TEST 11111111111111111');
     const userData = await this.usersService.findById(user.userId);
     return {
       success: true,

@@ -2,11 +2,9 @@ import { Controller, Get } from '@nestjs/common';
 import * as Sentry from '@sentry/nestjs';
 
 @Controller('debug')
-export class DebugController
-{
+export class DebugController {
   @Get('sentry')
-  public async testSentry(): Promise<{ ok: true; eventId: string | null }>
-  {
+  public async testSentry(): Promise<{ ok: true; eventId: string | null }> {
     const error = new Error('Test Sentry from NestJS');
     const eventId = Sentry.captureException(error);
 
@@ -20,8 +18,7 @@ export class DebugController
   }
 
   @Get('sentry/throw')
-  public testSentryThrow(): string
-  {
+  public testSentryThrow(): string {
     throw new Error('Test Sentry from NestJS (throw route)');
   }
 }

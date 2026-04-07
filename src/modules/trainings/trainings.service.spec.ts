@@ -5,8 +5,7 @@ import { PrismaService } from '@/prisma/prisma.service';
 import { CreateTrainingDto } from './dto/create-training.dto';
 import { TrainingFormat, TrainingType } from '@prisma/client';
 
-describe('TrainingsService', () =>
-{
+describe('TrainingsService', () => {
   let service: TrainingsService;
 
   const mockPrismaService = {
@@ -19,8 +18,7 @@ describe('TrainingsService', () =>
     },
   };
 
-  beforeEach(async () =>
-  {
+  beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         TrainingsService,
@@ -34,31 +32,27 @@ describe('TrainingsService', () =>
     service = module.get<TrainingsService>(TrainingsService);
   });
 
-  afterEach(() =>
-  {
+  afterEach(() => {
     jest.clearAllMocks();
   });
 
-  describe('create', () =>
-  {
-    it('should create a training', async () =>
-    {
+  describe('create', () => {
+    it('should create a training', async () => {
       const userId = 'user-id';
-      const createTrainingDto: CreateTrainingDto =
-        {
-          type: TrainingType.Bike,
-          date: '2024-01-10',
-          durationSeconds: 45,
-          distanceMeters: 8,
-          exerciseName: 'Bike easy',
-          format: TrainingFormat.intervals,
-          rounds: 3,
-          sets: 0,
-          reps: 0,
-          weightKg: 0,
-          restSeconds: 60,
-          comment: 'Nice session',
-        };
+      const createTrainingDto: CreateTrainingDto = {
+        type: TrainingType.Bike,
+        date: '2024-01-10',
+        durationSeconds: 45,
+        distanceMeters: 8,
+        exerciseName: 'Bike easy',
+        format: TrainingFormat.intervals,
+        rounds: 3,
+        sets: 0,
+        reps: 0,
+        weightKg: 0,
+        restSeconds: 60,
+        comment: 'Nice session',
+      };
 
       const mockTraining = {
         id: 'training-id',
@@ -81,10 +75,8 @@ describe('TrainingsService', () =>
     });
   });
 
-  describe('findOne', () =>
-  {
-    it('should return a training', async () =>
-    {
+  describe('findOne', () => {
+    it('should return a training', async () => {
       const trainingId = 'training-id';
       const userId = 'user-id';
       const mockTraining = {
@@ -102,15 +94,13 @@ describe('TrainingsService', () =>
       expect(result.data).toEqual(mockTraining);
     });
 
-    it('should throw NotFoundException if training not found', async () =>
-    {
+    it('should throw NotFoundException if training not found', async () => {
       mockPrismaService.training.findUnique.mockResolvedValue(null);
 
       await expect(service.findOne('invalid-id', 'user-id')).rejects.toThrow(NotFoundException);
     });
 
-    it('should throw ForbiddenException if user is not owner', async () =>
-    {
+    it('should throw ForbiddenException if user is not owner', async () => {
       const mockTraining = {
         id: 'training-id',
         userId: 'other-user-id',
@@ -124,10 +114,8 @@ describe('TrainingsService', () =>
     });
   });
 
-  describe('remove', () =>
-  {
-    it('should delete a training', async () =>
-    {
+  describe('remove', () => {
+    it('should delete a training', async () => {
       const trainingId = 'training-id';
       const userId = 'user-id';
       const mockTraining = {

@@ -1,17 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { TrainingFormat, TrainingType } from '@prisma/client';
-import {
-  IsDateString,
-  IsEnum,
-  IsInt,
-  IsOptional,
-  IsString,
-  Min,
-  IsNumber,
-} from 'class-validator';
+import { IsDateString, IsEnum, IsInt, IsOptional, IsString, Min, IsNumber } from 'class-validator';
 
-export class CreateTrainingDto
-{
+export class CreateTrainingDto {
   @ApiProperty({ example: TrainingType.Run, enum: TrainingType })
   @IsEnum(TrainingType)
   type: TrainingType;

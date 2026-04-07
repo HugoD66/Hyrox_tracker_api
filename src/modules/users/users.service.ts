@@ -63,6 +63,7 @@ export class UsersService {
 
   async searchPublicUsers(q?: string, excludeUserId?: string) {
     const trimmed = q?.trim();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const where: any = {
       isPublic: true,
       ...(excludeUserId && { NOT: { id: excludeUserId } }),
