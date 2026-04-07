@@ -1,0 +1,17 @@
+{
+  "path": ["src"],
+  "ignore": [
+    "**/*.spec.ts",
+    "**/*.test.ts",
+    "dist/**",
+    "coverage/**",
+    "node_modules/**",
+    "prisma/migrations/**"
+  ],
+  "reporters": ["console", "json", "html"],
+  "output": "reports/duplication",
+  "minLines": 5,
+  "minTokens": 50,
+  "absolute": false
+}
+

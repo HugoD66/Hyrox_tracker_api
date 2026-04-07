@@ -119,4 +119,3 @@ describe('UsersController', () => {
     });
   });
 });
-

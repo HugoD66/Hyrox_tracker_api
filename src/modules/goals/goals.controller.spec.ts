@@ -98,4 +98,3 @@ describe('GoalsController', () => {
     expect(result).toEqual(response);
   });
 });
-
