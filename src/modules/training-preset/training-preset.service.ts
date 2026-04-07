@@ -3,14 +3,10 @@ import { PrismaService } from '@/prisma/prisma.service';
 import { TrainingDifficulty, TrainingType } from '@prisma/client';
 
 @Injectable()
-export class TrainingPresetService
-{
-  constructor(private readonly prismaService: PrismaService)
-  {
-  }
+export class TrainingPresetService {
+  constructor(private readonly prismaService: PrismaService) {}
 
-  async findOne(params: { type: TrainingType; difficulty: TrainingDifficulty })
-  {
+  async findOne(params: { type: TrainingType; difficulty: TrainingDifficulty }) {
     const preset = await this.prismaService.trainingPreset.findUnique({
       where: {
         type_difficulty: {
@@ -20,8 +16,7 @@ export class TrainingPresetService
       },
     });
 
-    if (!preset)
-    {
+    if (!preset) {
       throw new NotFoundException('Training preset not found.');
     }
 

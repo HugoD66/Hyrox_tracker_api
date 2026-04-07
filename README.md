@@ -24,4 +24,11 @@ docker compose up -d
 
 - Endpoint Prometheus : `GET http://localhost:3000/api/metrics`
 - UI Prometheus : `http://localhost:9090`
-
+- UI Grafana : `http://localhost:3001`
+- Dashboard provisionné : `Hyrox / Hyrox Backend`
+- Métriques exposées :
+  - runtime Node.js/process via `prom-client`
+  - trafic HTTP par méthode, route et code HTTP
+  - latence HTTP avec histogramme Prometheus
+  - requêtes HTTP en cours
+  - statut et durée du check PostgreSQL

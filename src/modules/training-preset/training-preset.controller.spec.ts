@@ -8,7 +8,14 @@ describe('TrainingPresetController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [TrainingPresetController],
-      providers: [TrainingPresetService],
+      providers: [
+        {
+          provide: TrainingPresetService,
+          useValue: {
+            findOne: jest.fn(),
+          },
+        },
+      ],
     }).compile();
 
     controller = module.get<TrainingPresetController>(TrainingPresetController);
