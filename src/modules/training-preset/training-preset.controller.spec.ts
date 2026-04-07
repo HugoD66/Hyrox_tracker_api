@@ -5,15 +5,17 @@ import { TrainingPresetService } from './training-preset.service';
 describe('TrainingPresetController', () => {
   let controller: TrainingPresetController;
 
+  const trainingPresetServiceMock = {
+    findOne: jest.fn(),
+  };
+
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [TrainingPresetController],
       providers: [
         {
           provide: TrainingPresetService,
-          useValue: {
-            findOne: jest.fn(),
-          },
+          useValue: trainingPresetServiceMock,
         },
       ],
     }).compile();
