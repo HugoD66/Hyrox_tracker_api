@@ -13,8 +13,6 @@ export class SentryInterceptor implements NestInterceptor {
     const httpContext = context.switchToHttp();
     const request = httpContext.getRequest();
 
-    console.log('hihihihihihih');
-    console.log(request.user);
     const user = request.user as AuthenticatedUser | undefined;
 
     if (user?.id || user?.email) {
