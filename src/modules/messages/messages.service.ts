@@ -75,11 +75,14 @@ export class MessagesService {
     });
 
     // Merge and deduplicate by conversation partner
-    const convMap = new Map<string, {
-      partner: { id: string; firstName: string; lastName: string; avatar: string | null };
-      lastMessage: { content: string; createdAt: Date; senderId: string };
-      unreadCount: number;
-    }>();
+    const convMap = new Map<
+      string,
+      {
+        partner: { id: string; firstName: string; lastName: string; avatar: string | null };
+        lastMessage: { content: string; createdAt: Date; senderId: string };
+        unreadCount: number;
+      }
+    >();
 
     for (const msg of sent) {
       const partner = msg.receiver;

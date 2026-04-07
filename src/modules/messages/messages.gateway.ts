@@ -53,7 +53,10 @@ export class MessagesGateway implements OnGatewayConnection, OnGatewayDisconnect
     }
   }
 
-  notifyNewFollower(targetUserId: string, follower: { id: string; firstName: string; lastName: string; avatar: string | null }) {
+  notifyNewFollower(
+    targetUserId: string,
+    follower: { id: string; firstName: string; lastName: string; avatar: string | null },
+  ) {
     if (!this.server) return;
     this.server.to(`user:${targetUserId}`).emit('new_follower', follower);
   }
