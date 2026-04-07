@@ -1,12 +1,25 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { TrainingPresetService } from './training-preset.service';
+import { PrismaService } from '@/prisma/prisma.service';
 
 describe('TrainingPresetService', () => {
   let service: TrainingPresetService;
 
+  const prismaServiceMock = {
+    trainingPreset: {
+      findUnique: jest.fn(),
+    },
+  };
+
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [TrainingPresetService],
+      providers: [
+        TrainingPresetService,
+        {
+          provide: PrismaService,
+          useValue: prismaServiceMock,
+        },
+      ],
     }).compile();
 
     service = module.get<TrainingPresetService>(TrainingPresetService);
