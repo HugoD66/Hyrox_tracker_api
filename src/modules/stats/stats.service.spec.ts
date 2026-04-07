@@ -83,7 +83,13 @@ describe('StatsService', () => {
   describe('getProgression', () => {
     it('should return progression ordered by date asc', async () => {
       const courses = [
-        { id: 'c1', name: 'Race 1', date: new Date('2025-01-01T00:00:00.000Z'), totalTime: 5600, category: 'Men' },
+        {
+          id: 'c1',
+          name: 'Race 1',
+          date: new Date('2025-01-01T00:00:00.000Z'),
+          totalTime: 5600,
+          category: 'Men',
+        },
       ];
       mockPrismaService.course.findMany.mockResolvedValue(courses);
 
@@ -223,4 +229,3 @@ describe('StatsService', () => {
     });
   });
 });
-

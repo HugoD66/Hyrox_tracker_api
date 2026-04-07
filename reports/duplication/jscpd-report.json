@@ -1,0 +1,997 @@
+{
+  "statistics": {
+    "detectionDate": "2026-04-07T09:12:25.894Z",
+    "formats": {
+      "typescript": {
+        "sources": {
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/modules/users/dto/update-user.dto.ts": {
+            "lines": 40,
+            "tokens": 355,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 14,
+            "duplicatedTokens": 116,
+            "percentage": 35,
+            "percentageTokens": 32.68,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/modules/trainings/dto/update-training.dto.ts": {
+            "lines": 3,
+            "tokens": 41,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/modules/trainings/dto/create-training.dto.ts": {
+            "lines": 69,
+            "tokens": 631,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/modules/training-preset/dto/update-training-preset.dto.ts": {
+            "lines": 3,
+            "tokens": 41,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/modules/goals/dto/update-goal.dto.ts": {
+            "lines": 3,
+            "tokens": 41,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/modules/goals/dto/create-goal.dto.ts": {
+            "lines": 23,
+            "tokens": 196,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/modules/courses/dto/update-course.dto.ts": {
+            "lines": 3,
+            "tokens": 41,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/modules/courses/dto/import-course.dto.ts": {
+            "lines": 121,
+            "tokens": 839,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 33,
+            "duplicatedTokens": 196,
+            "percentage": 27.27,
+            "percentageTokens": 23.36,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/modules/courses/dto/create-course.dto.ts": {
+            "lines": 91,
+            "tokens": 621,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 33,
+            "duplicatedTokens": 196,
+            "percentage": 36.26,
+            "percentageTokens": 31.56,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/modules/auth/strategies/jwt.strategy.ts": {
+            "lines": 23,
+            "tokens": 200,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/modules/auth/dto/register.dto.ts": {
+            "lines": 37,
+            "tokens": 310,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 14,
+            "duplicatedTokens": 116,
+            "percentage": 37.84,
+            "percentageTokens": 37.42,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/modules/auth/dto/login.dto.ts": {
+            "lines": 11,
+            "tokens": 93,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/modules/users/users.service.ts": {
+            "lines": 178,
+            "tokens": 1429,
+            "sources": 1,
+            "clones": 2,
+            "duplicatedLines": 32,
+            "duplicatedTokens": 192,
+            "percentage": 17.98,
+            "percentageTokens": 13.44,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/modules/users/users.module.ts": {
+            "lines": 9,
+            "tokens": 82,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/modules/users/users.controller.ts": {
+            "lines": 75,
+            "tokens": 883,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/modules/trainings/trainings.service.ts": {
+            "lines": 123,
+            "tokens": 924,
+            "sources": 1,
+            "clones": 2,
+            "duplicatedLines": 26,
+            "duplicatedTokens": 214,
+            "percentage": 21.14,
+            "percentageTokens": 23.16,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/modules/trainings/trainings.module.ts": {
+            "lines": 11,
+            "tokens": 104,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/modules/trainings/trainings.controller.ts": {
+            "lines": 132,
+            "tokens": 1452,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/modules/training-preset/training-preset.service.ts": {
+            "lines": 24,
+            "tokens": 199,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/modules/training-preset/training-preset.module.ts": {
+            "lines": 8,
+            "tokens": 73,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/modules/training-preset/training-preset.controller.ts": {
+            "lines": 24,
+            "tokens": 302,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/modules/stats/stats.service.ts": {
+            "lines": 210,
+            "tokens": 2323,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/modules/stats/stats.module.ts": {
+            "lines": 8,
+            "tokens": 73,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/modules/stats/stats.controller.ts": {
+            "lines": 40,
+            "tokens": 468,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/modules/health/health.module.ts": {
+            "lines": 6,
+            "tokens": 51,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/modules/health/health.controller.ts": {
+            "lines": 46,
+            "tokens": 410,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/modules/goals/goals.service.ts": {
+            "lines": 134,
+            "tokens": 1036,
+            "sources": 1,
+            "clones": 6,
+            "duplicatedLines": 72,
+            "duplicatedTokens": 656,
+            "percentage": 53.73,
+            "percentageTokens": 63.32,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/modules/goals/goals.module.ts": {
+            "lines": 11,
+            "tokens": 104,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/modules/goals/goals.controller.ts": {
+            "lines": 64,
+            "tokens": 855,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/modules/debug/debug.module.ts": {
+            "lines": 9,
+            "tokens": 75,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/modules/debug/debug.controller.ts": {
+            "lines": 23,
+            "tokens": 195,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/modules/courses/csv-parser.service.ts": {
+            "lines": 206,
+            "tokens": 1895,
+            "sources": 1,
+            "clones": 2,
+            "duplicatedLines": 18,
+            "duplicatedTokens": 166,
+            "percentage": 8.74,
+            "percentageTokens": 8.76,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/modules/courses/courses.service.ts": {
+            "lines": 284,
+            "tokens": 2211,
+            "sources": 1,
+            "clones": 4,
+            "duplicatedLines": 24,
+            "duplicatedTokens": 320,
+            "percentage": 8.45,
+            "percentageTokens": 14.47,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/modules/courses/courses.module.ts": {
+            "lines": 12,
+            "tokens": 120,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/modules/courses/courses.controller.ts": {
+            "lines": 132,
+            "tokens": 1421,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/modules/auth/auth.service.ts": {
+            "lines": 99,
+            "tokens": 748,
+            "sources": 1,
+            "clones": 2,
+            "duplicatedLines": 20,
+            "duplicatedTokens": 178,
+            "percentage": 20.2,
+            "percentageTokens": 23.8,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/modules/auth/auth.module.ts": {
+            "lines": 21,
+            "tokens": 204,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/modules/auth/auth.controller.ts": {
+            "lines": 40,
+            "tokens": 494,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/common/interceptors/sentry.interceptor.ts": {
+            "lines": 29,
+            "tokens": 271,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/common/guards/jwt-auth.guard.ts": {
+            "lines": 9,
+            "tokens": 105,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/common/filters/sentry-exception.filter.ts": {
+            "lines": 10,
+            "tokens": 105,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/common/decorators/current-user.decorator.ts": {
+            "lines": 5,
+            "tokens": 72,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/prisma/prisma.service.ts": {
+            "lines": 76,
+            "tokens": 678,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/prisma/prisma.module.ts": {
+            "lines": 8,
+            "tokens": 68,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/main.ts": {
+            "lines": 80,
+            "tokens": 771,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/instrument.ts": {
+            "lines": 7,
+            "tokens": 74,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/home/hugo/Travail/M2/front-back/Hyrox_tracker_api/src/app.module.ts": {
+            "lines": 39,
+            "tokens": 340,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          }
+        },
+        "total": {
+          "lines": 2619,
+          "tokens": 24024,
+          "sources": 47,
+          "clones": 11,
+          "duplicatedLines": 143,
+          "duplicatedTokens": 1175,
+          "percentage": 5.46,
+          "percentageTokens": 4.89,
+          "newDuplicatedLines": 0,
+          "newClones": 0
+        }
+      }
+    },
+    "total": {
+      "lines": 2619,
+      "tokens": 24024,
+      "sources": 47,
+      "clones": 11,
+      "duplicatedLines": 143,
+      "duplicatedTokens": 1175,
+      "percentage": 5.46,
+      "percentageTokens": 4.89,
+      "newDuplicatedLines": 0,
+      "newClones": 0
+    }
+  },
+  "duplicates": [
+    {
+      "format": "typescript",
+      "lines": 34,
+      "fragment": ")\n  totalTime: number;\n\n  @ApiProperty({\n    example: 347,\n    description: 'Temps total des stations (Roxzone Time) en secondes',\n    required: false,\n  })\n  @IsOptional()\n  @IsInt()\n  @Min(0)\n  roxzoneTime?: number;\n\n  @ApiProperty({\n    example: 2647,\n    description: 'Temps total des runs (Run Total) en secondes',\n    required: false,\n  })\n  @IsOptional()\n  @IsInt()\n  @Min(0)\n  runTotal?: number;\n\n  @ApiProperty({\n    example: 328,\n    description: 'Meilleur temps de run (Best Run Lap) en secondes',\n    required: false,\n  })\n  @IsOptional()\n  @IsInt()\n  @Min(0)\n  bestRunLap?: number;\n\n  @ApiProperty({ example: 'Great performance!'",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src/modules/courses/dto/create-course.dto.ts",
+        "start": 49,
+        "end": 82,
+        "startLoc": {
+          "line": 49,
+          "column": 2,
+          "position": 336
+        },
+        "endLoc": {
+          "line": 82,
+          "column": 21,
+          "position": 532
+        }
+      },
+      "secondFile": {
+        "name": "src/modules/courses/dto/import-course.dto.ts",
+        "start": 47,
+        "end": 81,
+        "startLoc": {
+          "line": 47,
+          "column": 2,
+          "position": 364
+        },
+        "endLoc": {
+          "line": 81,
+          "column": 2,
+          "position": 561
+        }
+      }
+    },
+    {
+      "format": "typescript",
+      "lines": 15,
+      "fragment": ": string;\n\n  @ApiProperty({ example: 'Men', required: false })\n  @IsOptional()\n  @IsString()\n  category?: string;\n\n  @ApiProperty({ example: 75.5, required: false })\n  @IsOptional()\n  weight?: number;\n\n  @ApiProperty({ example: 180, required: false })\n  @IsOptional()\n  height?: number;\n}",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src/modules/auth/dto/register.dto.ts",
+        "start": 24,
+        "end": 38,
+        "startLoc": {
+          "line": 24,
+          "column": 9,
+          "position": 194
+        },
+        "endLoc": {
+          "line": 38,
+          "column": 2,
+          "position": 310
+        }
+      },
+      "secondFile": {
+        "name": "src/modules/users/dto/update-user.dto.ts",
+        "start": 17,
+        "end": 32,
+        "startLoc": {
+          "line": 17,
+          "column": 2,
+          "position": 151
+        },
+        "endLoc": {
+          "line": 32,
+          "column": 2,
+          "position": 269
+        }
+      }
+    },
+    {
+      "format": "typescript",
+      "lines": 17,
+      "fragment": ",\n      select: {\n        id: true,\n        email: true,\n        firstName: true,\n        lastName: true,\n        category: true,\n        weight: true,\n        height: true,\n        avatar: true,\n        isPublic: true,\n        createdAt: true,\n        updatedAt: true,\n      },\n    });\n\n    return",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src/modules/users/users.service.ts",
+        "start": 146,
+        "end": 162,
+        "startLoc": {
+          "line": 146,
+          "column": 14,
+          "position": 1231
+        },
+        "endLoc": {
+          "line": 162,
+          "column": 7,
+          "position": 1327
+        }
+      },
+      "secondFile": {
+        "name": "src/modules/users/users.service.ts",
+        "start": 120,
+        "end": 136,
+        "startLoc": {
+          "line": 120,
+          "column": 2,
+          "position": 1047
+        },
+        "endLoc": {
+          "line": 136,
+          "column": 3,
+          "position": 1143
+        }
+      }
+    },
+    {
+      "format": "typescript",
+      "lines": 14,
+      "fragment": "(id: string, userId: string) {\n    const training = await this.prisma.training.findUnique({\n      where: { id },\n    });\n\n    if (!training) {\n      throw new NotFoundException('Training not found');\n    }\n\n    if (training.userId !== userId) {\n      throw new ForbiddenException('Access denied');\n    }\n\n    await",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src/modules/trainings/trainings.service.ts",
+        "start": 102,
+        "end": 115,
+        "startLoc": {
+          "line": 102,
+          "column": 7,
+          "position": 762
+        },
+        "endLoc": {
+          "line": 115,
+          "column": 6,
+          "position": 869
+        }
+      },
+      "secondFile": {
+        "name": "src/modules/trainings/trainings.service.ts",
+        "start": 58,
+        "end": 71,
+        "startLoc": {
+          "line": 58,
+          "column": 8,
+          "position": 432
+        },
+        "endLoc": {
+          "line": 71,
+          "column": 7,
+          "position": 539
+        }
+      }
+    },
+    {
+      "format": "typescript",
+      "lines": 11,
+      "fragment": ") {\n    const goal = await this.prisma.goal.findUnique({\n      where: { id },\n    });\n\n    if (!goal) {\n      throw new NotFoundException('Goal not found');\n    }\n\n    if (goal.userId !== userId) {\n      throw new ForbiddenException('You can only update your own goals'",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src/modules/goals/goals.service.ts",
+        "start": 57,
+        "end": 67,
+        "startLoc": {
+          "line": 57,
+          "column": 14,
+          "position": 458
+        },
+        "endLoc": {
+          "line": 67,
+          "column": 37,
+          "position": 545
+        }
+      },
+      "secondFile": {
+        "name": "src/modules/goals/goals.service.ts",
+        "start": 38,
+        "end": 48,
+        "startLoc": {
+          "line": 38,
+          "column": 7,
+          "position": 315
+        },
+        "endLoc": {
+          "line": 48,
+          "column": 37,
+          "position": 402
+        }
+      }
+    },
+    {
+      "format": "typescript",
+      "lines": 11,
+      "fragment": "(id: string, userId: string) {\n    const goal = await this.prisma.goal.findUnique({\n      where: { id },\n    });\n\n    if (!goal) {\n      throw new NotFoundException('Goal not found');\n    }\n\n    if (goal.userId !== userId) {\n      throw new ForbiddenException('You can only delete your own goals'",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src/modules/goals/goals.service.ts",
+        "start": 85,
+        "end": 95,
+        "startLoc": {
+          "line": 85,
+          "column": 7,
+          "position": 666
+        },
+        "endLoc": {
+          "line": 95,
+          "column": 37,
+          "position": 764
+        }
+      },
+      "secondFile": {
+        "name": "src/modules/goals/goals.service.ts",
+        "start": 38,
+        "end": 48,
+        "startLoc": {
+          "line": 38,
+          "column": 8,
+          "position": 304
+        },
+        "endLoc": {
+          "line": 48,
+          "column": 37,
+          "position": 402
+        }
+      }
+    },
+    {
+      "format": "typescript",
+      "lines": 17,
+      "fragment": "(id: string, userId: string) {\n    const goal = await this.prisma.goal.findUnique({\n      where: { id },\n    });\n\n    if (!goal) {\n      throw new NotFoundException('Goal not found');\n    }\n\n    if (goal.userId !== userId) {\n      throw new ForbiddenException('You can only update your own goals');\n    }\n\n    const updatedGoal = await this.prisma.goal.update({\n      where: { id },\n      data: {\n        achieved",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src/modules/goals/goals.service.ts",
+        "start": 108,
+        "end": 124,
+        "startLoc": {
+          "line": 108,
+          "column": 15,
+          "position": 833
+        },
+        "endLoc": {
+          "line": 124,
+          "column": 9,
+          "position": 976
+        }
+      },
+      "secondFile": {
+        "name": "src/modules/goals/goals.service.ts",
+        "start": 38,
+        "end": 73,
+        "startLoc": {
+          "line": 38,
+          "column": 8,
+          "position": 304
+        },
+        "endLoc": {
+          "line": 73,
+          "column": 4,
+          "position": 590
+        }
+      }
+    },
+    {
+      "format": "typescript",
+      "lines": 10,
+      "fragment": "Array<{\n        name: string;\n        city: string;\n        date: string;\n        category: string;\n        totalTime: number;\n        times?: Array<{ segment: string; timeSeconds: number }>;\n        source?: string;\n        notes?: string;\n      }> =",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src/modules/courses/csv-parser.service.ts",
+        "start": 50,
+        "end": 59,
+        "startLoc": {
+          "line": 50,
+          "column": 2,
+          "position": 389
+        },
+        "endLoc": {
+          "line": 59,
+          "column": 2,
+          "position": 472
+        }
+      },
+      "secondFile": {
+        "name": "src/modules/courses/csv-parser.service.ts",
+        "start": 38,
+        "end": 48,
+        "startLoc": {
+          "line": 38,
+          "column": 5,
+          "position": 277
+        },
+        "endLoc": {
+          "line": 48,
+          "column": 2,
+          "position": 361
+        }
+      }
+    },
+    {
+      "format": "typescript",
+      "lines": 7,
+      "fragment": "create: times.map((time: { segment: string; timeSeconds: number; place?: number }) => ({\n              segment: time.segment,\n              timeSeconds: time.timeSeconds,\n              place: time.place || null,\n            })),\n          },\n        })",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src/modules/courses/courses.service.ts",
+        "start": 157,
+        "end": 163,
+        "startLoc": {
+          "line": 157,
+          "column": 13,
+          "position": 1205
+        },
+        "endLoc": {
+          "line": 163,
+          "column": 2,
+          "position": 1287
+        }
+      },
+      "secondFile": {
+        "name": "src/modules/courses/courses.service.ts",
+        "start": 61,
+        "end": 67,
+        "startLoc": {
+          "line": 61,
+          "column": 11,
+          "position": 488
+        },
+        "endLoc": {
+          "line": 67,
+          "column": 2,
+          "position": 570
+        }
+      }
+    },
+    {
+      "format": "typescript",
+      "lines": 7,
+      "fragment": "{\n                create: times.map(\n                  (time: { segment: string; timeSeconds: number; place?: number }) => ({\n                    segment: time.segment,\n                    timeSeconds: time.timeSeconds,\n                    place: time.place || null,\n                  }),",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src/modules/courses/courses.service.ts",
+        "start": 220,
+        "end": 226,
+        "startLoc": {
+          "line": 220,
+          "column": 2,
+          "position": 1720
+        },
+        "endLoc": {
+          "line": 226,
+          "column": 2,
+          "position": 1798
+        }
+      },
+      "secondFile": {
+        "name": "src/modules/courses/courses.service.ts",
+        "start": 60,
+        "end": 65,
+        "startLoc": {
+          "line": 60,
+          "column": 2,
+          "position": 485
+        },
+        "endLoc": {
+          "line": 65,
+          "column": 2,
+          "position": 561
+        }
+      }
+    },
+    {
+      "format": "typescript",
+      "lines": 11,
+      "fragment": "// Generate JWT token\n    const payload = { sub: user.id, email: user.email };\n    const accessToken = this.jwtService.sign(payload);\n\n    return {\n      success: true,\n      data: {\n        user: this.sanitizeUser(user),\n        accessToken,\n      },\n      message: 'Login successful'",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src/modules/auth/auth.service.ts",
+        "start": 67,
+        "end": 77,
+        "startLoc": {
+          "line": 67,
+          "column": 5,
+          "position": 512
+        },
+        "endLoc": {
+          "line": 77,
+          "column": 19,
+          "position": 601
+        }
+      },
+      "secondFile": {
+        "name": "src/modules/auth/auth.service.ts",
+        "start": 36,
+        "end": 46,
+        "startLoc": {
+          "line": 36,
+          "column": 5,
+          "position": 265
+        },
+        "endLoc": {
+          "line": 46,
+          "column": 31,
+          "position": 354
+        }
+      }
+    }
+  ]
+}

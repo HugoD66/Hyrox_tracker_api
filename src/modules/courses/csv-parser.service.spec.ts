@@ -37,10 +37,7 @@ describe('CsvParserService', () => {
   });
 
   it('should fallback to gender when division is missing', async () => {
-    const csv = [
-      'Race,Gender,Total Time',
-      'HYROX Berlin 2025,Female,59:30',
-    ].join('\n');
+    const csv = ['Race,Gender,Total Time', 'HYROX Berlin 2025,Female,59:30'].join('\n');
 
     const result = await service.parseHyroxCsv(toBuffer(csv));
 
@@ -50,11 +47,7 @@ describe('CsvParserService', () => {
   });
 
   it('should ignore rows missing Race or Total Time', async () => {
-    const csv = [
-      'Race,Division,Total Time',
-      ',Open,01:02:03',
-      'HYROX Nice 2025,Open,',
-    ].join('\n');
+    const csv = ['Race,Division,Total Time', ',Open,01:02:03', 'HYROX Nice 2025,Open,'].join('\n');
 
     const result = await service.parseHyroxCsv(toBuffer(csv));
 
@@ -62,10 +55,7 @@ describe('CsvParserService', () => {
   });
 
   it('should ignore rows with invalid total time format', async () => {
-    const csv = [
-      'Race,Division,Total Time',
-      'HYROX Lyon 2025,Open,abc',
-    ].join('\n');
+    const csv = ['Race,Division,Total Time', 'HYROX Lyon 2025,Open,abc'].join('\n');
 
     const result = await service.parseHyroxCsv(toBuffer(csv));
 
@@ -88,10 +78,7 @@ describe('CsvParserService', () => {
   });
 
   it('should default to current date format when race name has no year', async () => {
-    const csv = [
-      'Race,Division,Total Time',
-      'HYROX Unknown City,Open,00:45:10',
-    ].join('\n');
+    const csv = ['Race,Division,Total Time', 'HYROX Unknown City,Open,00:45:10'].join('\n');
 
     const result = await service.parseHyroxCsv(toBuffer(csv));
 
@@ -99,4 +86,3 @@ describe('CsvParserService', () => {
     expect(result[0].date).toMatch(/^\d{4}-\d{2}-\d{2}$/);
   });
 });
-
