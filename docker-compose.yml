@@ -60,6 +60,10 @@ services:
       JWT_SECRET: dev-secret-key
       JWT_EXPIRATION: 7d
       CORS_ORIGIN: http://localhost:4200,http://127.0.0.1:4200
+      SENTRY_DSN: ${SENTRY_DSN}
+      SENTRY_ENVIRONMENT: ${SENTRY_ENVIRONMENT:-development}
+      SENTRY_RELEASE: ${SENTRY_RELEASE:-local-dev}
+      SENTRY_DEMO_FORCE_LOGIN_500: ${SENTRY_DEMO_FORCE_LOGIN_500:-false}
     depends_on:
       postgres:
         condition: service_healthy
