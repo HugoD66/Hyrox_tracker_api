@@ -79,7 +79,7 @@ export class AuthService {
   }
 
   async getProfile(userId: string) {
-    console.log('CECEI EST UN TEST 22222222222222222')
+    console.log('CECEI EST UN TEST 22222222222222222');
 
     const user = await this.usersService.findById(userId);
     if (!user) {

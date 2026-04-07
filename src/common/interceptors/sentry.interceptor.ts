@@ -1,32 +1,23 @@
-import {
-  CallHandler,
-  ExecutionContext,
-  Injectable,
-  NestInterceptor,
-} from '@nestjs/common';
+import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import * as Sentry from '@sentry/nestjs';
 
-interface AuthenticatedUser
-{
+interface AuthenticatedUser {
   email?: string;
   id?: string;
 }
 
 @Injectable()
-export class SentryInterceptor implements NestInterceptor
-{
-  public intercept(context: ExecutionContext, next: CallHandler): Observable<unknown>
-  {
+export class SentryInterceptor implements NestInterceptor {
+  public intercept(context: ExecutionContext, next: CallHandler): Observable<unknown> {
     const httpContext = context.switchToHttp();
     const request = httpContext.getRequest();
 
-    console.log('hihihihihihih')
+    console.log('hihihihihihih');
     console.log(request.user);
     const user = request.user as AuthenticatedUser | undefined;
 
-    if (user?.id || user?.email)
-    {
+    if (user?.id || user?.email) {
       Sentry.setUser({
         userId: user.id,
         email: user.email,
