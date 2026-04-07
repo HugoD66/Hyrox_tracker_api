@@ -9,9 +9,14 @@ import { StatsModule } from './modules/stats/stats.module';
 import { HealthModule } from './modules/health/health.module';
 import { GoalsModule } from './modules/goals/goals.module';
 import { TrainingPresetModule } from '@/modules/training-preset/training-preset.module';
+import { DebugModule } from '@/modules/debug/debug.module';
+import { SentryModule } from '@sentry/nestjs/setup';
+
+const isDevelopment = process.env.NODE_ENV === 'development';
 
 @Module({
   imports: [
+    SentryModule.forRoot(),
     // Rate limiting
     ThrottlerModule.forRoot([
       {
@@ -29,6 +34,7 @@ import { TrainingPresetModule } from '@/modules/training-preset/training-preset.
     HealthModule,
     GoalsModule,
     TrainingPresetModule,
+    ...(isDevelopment ? [DebugModule] : []),
   ],
 })
 export class AppModule {}
